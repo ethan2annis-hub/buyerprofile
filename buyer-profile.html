@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethan Annis — Buyer Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1e293b;
+            --slate: #475569;
+            --slate-light: #64748b;
+            --blue: #3b82f6;
+            --blue-dark: #2563eb;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --amber: #f59e0b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #fefce8 50%, #ffffff 100%);
+            background-attachment: fixed;
+            color: var(--navy);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* Header with Photo */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 48px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .header-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-info .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--blue);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header-info h1 {
+            font-family: 'Newsreader', serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .header-info .title {
+            font-size: 1.125rem;
+            color: var(--slate);
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease-out;
+            animation-delay: 0.1s;
+            animation-fill-mode: both;
+        }
+
+        .hero h2 {
+            font-family: 'Newsreader', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero .subheadline {
+            font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+            color: var(--slate);
+            margin-bottom: 32px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .hero .context {
+            font-size: 1rem;
+            color: var(--slate-light);
+            line-height: 1.7;
+            padding: 24px 28px;
+            background: var(--white);
+            border-left: 4px solid var(--amber);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .hero .context::before {
+            content: '💡';
+            position: absolute;
+            top: 24px;
+            left: -12px;
+            background: var(--white);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* Section Headers */
+        .section {
+            margin-bottom: 64px;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+
+        .section-header {
+            font-family: 'Newsreader', serif;
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .section-intro {
+            font-size: 1.125rem;
+            color: var(--slate);
+            margin-bottom: 32px;
+        }
+
+        /* Buy Box Section */
+        .buy-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+            border: 2px solid var(--blue);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 16px -4px rgba(59,130,246,0.15), 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue) 0%, var(--amber) 100%);
+        }
+
+        .buy-box:hover {
+            box-shadow: 0 12px 24px -6px rgba(59,130,246,0.2), 0 8px 12px -2px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .buy-box-category {
+            margin-bottom: 40px;
+        }
+
+        .buy-box-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .buy-box-category h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--blue-dark);
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+        }
+
+        .buy-box-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .buy-box-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .buy-box-label {
+            font-weight: 700;
+            color: var(--navy);
+            min-width: 180px;
+            flex-shrink: 0;
+        }
+
+        .buy-box-value {
+            color: var(--slate);
+            flex: 1;
+        }
+
+        /* Why Work With Me Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 8px;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue) 0%, var(--amber) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -4px rgba(59,130,246,0.2);
+            border-color: var(--blue);
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-card h4 {
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+            font-size: 1.0625rem;
+        }
+
+        .benefit-card p {
+            color: var(--slate);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* Callout Box */
+        .callout {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+            color: var(--white);
+            padding: 28px 32px;
+            border-radius: 8px;
+            margin-top: 40px;
+            border-left: 4px solid var(--amber);
+            box-shadow: 0 8px 16px -4px rgba(37,99,235,0.3);
+        }
+
+        .callout p {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--navy) 0%, #334155 100%);
+            color: var(--white);
+            padding: 48px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-family: 'Newsreader', serif;
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .contact-section p {
+            font-size: 1.125rem;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .contact-name {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-name a:hover {
+            border-bottom-color: var(--amber) !important;
+        }
+
+        .contact-methods {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.0625rem;
+        }
+
+        .contact-item a {
+            color: var(--white);
+            text-decoration: none;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .contact-item a:hover {
+            border-bottom-color: var(--amber);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            .header-photo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .hero {
+                margin-bottom: 60px;
+            }
+
+            .buy-box {
+                padding: 28px 24px;
+            }
+
+            .buy-box-item {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .buy-box-label {
+                min-width: auto;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                padding: 36px 24px;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .buy-box,
+            .benefit-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .contact-section {
+                background: var(--navy);
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Name and Photo -->
+        <header class="header">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQHkDhBjbKhNnQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1713393122901?e=2147483647&v=beta&t=sMvsQuGg7xRCOZ3pvDWs2ZJDldBTjvsVmx17Ya0XUqU" alt="Ethan Annis" class="header-photo">
+            <div class="header-info">
+                <div class="label">Buyer Profile</div>
+                <h1>Ethan Annis</h1>
+                <p class="title">Product Marketing Leader | MBA | Former Business Owner</p>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>I'm looking to acquire my first business</h2>
+            <p class="subheadline">
+                I'm a pre-qualified buyer with capital committed, a clear buy box, and the experience to close. If you work with serious buyers in the $1M–$2M range, let's talk.
+            </p>
+            <div class="context">
+                I'm currently Sr. Product Marketing Manager at BILL and a former small business owner (I ran a successful fertilizing and aeration business). I've built my net worth to $1.5M through real estate and W2 income. Now I'm ready to acquire a business that fits my criteria and capital.
+            </div>
+        </section>
+
+        <!-- Buy Box Section -->
+        <section class="section">
+            <h2 class="section-header">My buy box</h2>
+            <p class="section-intro">I'm new to this process, but here is a strong approximation of what I'm looking for:</p>
+
+            <div class="buy-box">
+                <!-- Financial Requirements -->
+                <div class="buy-box-category">
+                    <h3>Financial requirements</h3>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Purchase Price:</div>
+                        <div class="buy-box-value">$1M – $2M</div>
+                    </div>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Minimum Cash Flow:</div>
+                        <div class="buy-box-value">$100K post-debt annually (hard floor)</div>
+                    </div>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Debt Service Coverage:</div>
+                        <div class="buy-box-value">2x minimum (non-negotiable)</div>
+                    </div>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Operating History:</div>
+                        <div class="buy-box-value">5+ years with flat-stable or growing revenue</div>
+                    </div>
+                </div>
+
+                <!-- Business Structure -->
+                <div class="buy-box-category">
+                    <h3>Business structure</h3>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Employees:</div>
+                        <div class="buy-box-value">5 or fewer</div>
+                    </div>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Management:</div>
+                        <div class="buy-box-value">Manager or foreman already in place running day-to-day operations</div>
+                    </div>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Owner Independence:</div>
+                        <div class="buy-box-value">Business must be owner independent before I buy.</div>
+                    </div>
+                </div>
+
+                <!-- Revenue Model -->
+                <div class="buy-box-category">
+                    <h3>Revenue model</h3>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Recurring Revenue:</div>
+                        <div class="buy-box-value">Required — contracts, subscriptions, or retainers (not project-dependent)</div>
+                    </div>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Customer Concentration:</div>
+                        <div class="buy-box-value">No single customer above 20% of revenue (prefer under 10%)</div>
+                    </div>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Customer Acquisition:</div>
+                        <div class="buy-box-value">Systematic (SEO, paid ads, sales team) — not relationship or referral dependent</div>
+                    </div>
+                </div>
+
+                <!-- Industry & Geography -->
+                <div class="buy-box-category">
+                    <h3>Industry & geography</h3>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Industry:</div>
+                        <div class="buy-box-value">Open to most industries. Software businesses strongly preferred given my background. B2B preferred, B2C acceptable. Not interested in food service or restaurants.</div>
+                    </div>
+                    <div class="buy-box-item">
+                        <div class="buy-box-label">Location:</div>
+                        <div class="buy-box-value">Utah-based preferred. Regional (Mountain West) acceptable. Out of state only if everything else is exceptional.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Work With Me Section -->
+        <section class="section">
+            <h2 class="section-header">Why work with me</h2>
+            <p class="section-intro">I know brokers deal with lots of tire kickers. I've done the work to understand what I'm looking for, and I'm ready to move when the right deal shows up.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h4>Pre-qualified and capitalized</h4>
+                    <p>I have capital committed and lender relationships in place</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Clear decision-making criteria</h4>
+                    <p>I know my buy box and can qualify deals quickly without wasting your time</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Domain expertise</h4>
+                    <p>9 years in product marketing and SaaS, plus hands-on small business ownership experience</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Realistic expectations</h4>
+                    <p>I understand the process, the timeline, and what it takes to close</p>
+                </div>
+            </div>
+
+            <div class="callout">
+                <p>I'm planning to close my first acquisition in 2026. If you have a deal that fits this profile, I'd like to hear about it.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2>Let's talk</h2>
+            <p>If you're working with a seller who matches this buy box, reach out. I respond quickly and I'm ready to move on the right opportunity.</p>
+
+            <div class="contact-info">
+                <div class="contact-name"><a href="https://www.linkedin.com/in/e-annis/" target="_blank" style="color: var(--white); text-decoration: none; border-bottom: 2px solid rgba(255,255,255,0.3); transition: border-color 0.2s ease;">Ethan Annis</a></div>
+                <div class="contact-methods">
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <a href="tel:8017108898">801.710.8898</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <a href="mailto:ethan2annis@gmail.com">ethan2annis@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
